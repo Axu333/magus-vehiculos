@@ -163,12 +163,11 @@
   /* ---------- Botón flotante de WhatsApp ---------- */
   var flotante = document.getElementById('flotante');
   var hero = document.getElementById('inicio');
-  var contacto = document.getElementById('contacto');
+  // Aparece al salir del inicio y queda fijo hasta el final (no se esconde bajo el dedo)
   if (flotante && hero && 'IntersectionObserver' in window) {
-    var enHero = true, enContacto = false;
-    var refrescar = function () { flotante.classList.toggle('visible', !enHero && !enContacto); };
-    new IntersectionObserver(function (e) { enHero = e[0].isIntersecting; refrescar(); }).observe(hero);
-    if (contacto) new IntersectionObserver(function (e) { enContacto = e[0].isIntersecting; refrescar(); }, { threshold: 0.15 }).observe(contacto);
+    new IntersectionObserver(function (e) {
+      flotante.classList.toggle('visible', e[0].intersectionRatio < 0.35);
+    }, { threshold: [0, 0.35, 1] }).observe(hero);
   } else if (flotante) {
     flotante.classList.add('visible');
   }

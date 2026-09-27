@@ -133,6 +133,8 @@
   opacity:0; transform:translateY(-8px);
   transition:opacity .22s ease, transform .22s ease;
 }
+.menu-movil[hidden]{ display:none; }
+.menu-movil:not(.abierto){ pointer-events:none; }
 .menu-movil.abierto{ opacity:1; transform:none; }
 .menu-movil ul li{ border-bottom:1px solid var(--borde); }
 .menu-movil ul a{
